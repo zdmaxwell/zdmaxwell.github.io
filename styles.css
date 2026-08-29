@@ -1,0 +1,359 @@
+:root {
+  --bg: #12110f;
+  --bg-raise: #1a1815;
+  --ink: #efe8dc;
+  --muted: #8f877b;
+  --line: #2c2924;
+  --accent: #6e7c43;
+  --accent-soft: color-mix(in srgb, var(--accent) 22%, transparent);
+  --steel: #8a9480;
+  --max: 68rem;
+  --gutter: clamp(1.25rem, 4vw, 2.75rem);
+  --serif: "Instrument Serif", "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 500px at 80% -10%, #1c2416 0%, transparent 55%),
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--ink) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--ink) 4%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), transparent 70%);
+  z-index: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 10;
+  padding: 0.4rem 0.7rem;
+  background: var(--accent);
+  color: var(--bg);
+  text-decoration: none;
+}
+
+.skip:focus {
+  top: 1rem;
+}
+
+.frame {
+  position: relative;
+  z-index: 1;
+  width: min(var(--max), 100%);
+  margin: 0 auto;
+  padding: 0 var(--gutter) 4rem;
+}
+
+.mast {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.4rem 0 1.2rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.mark {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.mark-id {
+  color: var(--accent);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+}
+
+.mark-name {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.mast nav {
+  display: flex;
+  gap: 1.15rem;
+}
+
+.mast nav a {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--muted);
+}
+
+.mast nav a:hover {
+  color: var(--ink);
+}
+
+.hero {
+  padding: 4.5rem 0 3.5rem;
+}
+
+.eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 0 0 1.4rem;
+  color: var(--steel);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0 0 1.4rem;
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: color-mix(in srgb, var(--ink) 78%, var(--accent));
+}
+
+.lede {
+  max-width: 42rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.rule {
+  margin: 2.4rem 0 0;
+}
+
+.rule svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.rule-base {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.rule-ticks line {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.rule-scan path {
+  stroke: color-mix(in srgb, var(--steel) 42%, transparent);
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+
+.rule-origin {
+  fill: var(--steel);
+}
+
+.section-head {
+  display: grid;
+  grid-template-columns: minmax(10rem, 16rem) 1fr;
+  gap: 1rem 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-head h2,
+.colophon p,
+.session-title {
+  margin: 0;
+}
+
+.section-head h2 {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+.section-head p,
+.notes-grid p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.sessions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sessions a {
+  display: grid;
+  grid-template-columns: 3rem 1fr auto;
+  gap: 1.25rem;
+  align-items: start;
+  padding: 1.45rem 0.2rem;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+}
+
+.sessions a:hover {
+  color: inherit;
+  background: linear-gradient(90deg, var(--accent-soft), transparent 55%);
+}
+
+.idx {
+  color: var(--accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  padding-top: 0.35rem;
+}
+
+.session-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.65rem 0.9rem;
+}
+
+.session-title {
+  font-family: var(--serif);
+  font-size: 1.55rem;
+  line-height: 1.15;
+}
+
+.session-date {
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.session-copy {
+  display: block;
+  max-width: 36rem;
+  margin-top: 0.4rem;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  padding-top: 0.35rem;
+}
+
+.tags span {
+  padding: 0.18rem 0.45rem;
+  border: 1px solid var(--line);
+  color: var(--steel);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.notes {
+  padding: 4.5rem 0 3rem;
+}
+
+.notes .notes-grid {
+  padding-top: 0;
+}
+
+.notes .section-head {
+  grid-template-columns: 1fr;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding-top: 1.5rem;
+}
+
+.notes-grid a {
+  color: var(--ink);
+}
+
+.colophon {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.colophon a {
+  text-decoration: none;
+}
+
+@media (max-width: 760px) {
+  .hero {
+    padding-top: 3rem;
+  }
+
+  .section-head,
+  .sessions a,
+  .notes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tags {
+    justify-content: flex-start;
+  }
+
+  .colophon {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

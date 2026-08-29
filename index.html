@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="My personal site where I share my hobby projects and what I'm learning."
+    />
+    <title>Zach Maxwell</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <div class="frame">
+      <header class="mast">
+        <a class="mark" href="#notes" aria-label="Zach Maxwell, top of page">
+          <span class="mark-id">ZM</span>
+          <span class="mark-name">zach maxwell</span>
+        </a>
+        <nav aria-label="Primary">
+          <a href="#notes">About</a>
+          <a href="#work">Projects</a>
+          <a href="https://github.com/zdmaxwell" rel="noopener noreferrer">GitHub</a>
+        </nav>
+      </header>
+
+      <main id="main">
+        <section class="hero notes" id="notes" aria-labelledby="notes-title">
+          <h1 id="notes-title">About Me</h1>
+          <div class="notes-grid">
+            <p>
+              I’m a software engineer working professionally on agent harnesses, infrastructure, and distributed systems. I have an interest in learning about and working on autonomous vehicles and robotics projects in my free time.
+              My academic background is in mechanical engineering, which is where I was first introduced to classical controls and robotics. From there, I've continued to enjoy the intersection of software and hardware in autonomous systems.
+            </p>
+          </div>
+          <figure class="rule" aria-hidden="true">
+            <svg viewBox="0 0 920 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line class="rule-base" x1="0" y1="58" x2="920" y2="58" />
+              <g class="rule-ticks">
+                <line x1="0" y1="58" x2="0" y2="64" />
+                <line x1="92" y1="58" x2="92" y2="62" />
+                <line x1="184" y1="58" x2="184" y2="62" />
+                <line x1="276" y1="58" x2="276" y2="62" />
+                <line x1="368" y1="58" x2="368" y2="62" />
+                <line x1="460" y1="58" x2="460" y2="64" />
+                <line x1="552" y1="58" x2="552" y2="62" />
+                <line x1="644" y1="58" x2="644" y2="62" />
+                <line x1="736" y1="58" x2="736" y2="62" />
+                <line x1="828" y1="58" x2="828" y2="62" />
+                <line x1="920" y1="58" x2="920" y2="64" />
+              </g>
+              <g class="rule-scan">
+                <path d="M460 58 L 318 10" />
+                <path d="M460 58 L 352 8" />
+                <path d="M460 58 L 390 6" />
+                <path d="M460 58 L 428 5" />
+                <path d="M460 58 L 460 4" />
+                <path d="M460 58 L 492 5" />
+                <path d="M460 58 L 530 6" />
+                <path d="M460 58 L 568 8" />
+                <path d="M460 58 L 602 10" />
+              </g>
+              <circle class="rule-origin" cx="460" cy="58" r="2.2" />
+            </svg>
+          </figure>
+        </section>
+
+        <section class="work" id="work" aria-labelledby="work-title">
+          <div class="section-head">
+            <h2 id="work-title">Projects</h2>
+          </div>
+
+          <ol class="sessions">
+            <li>
+              <a href="https://github.com/zdmaxwell/f1tenth_workspace" rel="noopener noreferrer">
+                <span class="idx">01</span>
+                <span class="session-body">
+                  <span class="session-head">
+                    <span class="session-title">F1TENTH</span>
+                    <time class="session-date" datetime="2025-04">2025–2026</time>
+                  </span>
+                  <span class="session-copy">
+                    Learning autonomous driving at 1/10 scale with ROS&nbsp;2,
+                    NVIDIA Isaac Sim, and the F1TENTH stack.
+                  </span>
+                </span>
+                <span class="tags">
+                  <span>ROS 2</span>
+                  <span>Isaac Sim</span>
+                  <span>F1TENTH</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/zdmaxwell/3d-motion-planning" rel="noopener noreferrer">
+                <span class="idx">02</span>
+                <span class="session-body">
+                  <span class="session-head">
+                    <span class="session-title">3D motion planning</span>
+                    <time class="session-date" datetime="2024-09">2024</time>
+                  </span>
+                  <span class="session-copy">
+                    Simulated quadcopter path planning with A* through a 3D
+                    path.
+                  </span>
+                </span>
+                <span class="tags">
+                  <span>A*</span>
+                  <span>planning</span>
+                  <span>quadcopter</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/zdmaxwell/3d_estimation_and_control" rel="noopener noreferrer">
+                <span class="idx">03</span>
+                <span class="session-body">
+                  <span class="session-head">
+                    <span class="session-title">Estimation and control</span>
+                    <time class="session-date" datetime="2025-02">2025</time>
+                  </span>
+                  <span class="session-copy">
+                    3D extended Kalman filter with PID control on a simulated
+                    quadcopter.
+                  </span>
+                </span>
+                <span class="tags">
+                  <span>EKF</span>
+                  <span>PID</span>
+                  <span>estimation</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/zdmaxwell/3d_quadcopter_control" rel="noopener noreferrer">
+                <span class="idx">04</span>
+                <span class="session-body">
+                  <span class="session-head">
+                    <span class="session-title">3D quadcopter control</span>
+                    <time class="session-date" datetime="2024-11">2024</time>
+                  </span>
+                  <span class="session-copy">
+                    Full 3D PID control for a simulated quadrotor.
+                  </span>
+                </span>
+                <span class="tags">
+                  <span>PID</span>
+                  <span>control</span>
+                  <span>simulation</span>
+                </span>
+              </a>
+            </li>
+          </ol>
+        </section>
+      </main>
+
+      <footer class="colophon">
+        <p>© 2026 zach maxwell</p>
+        <p>
+          <a href="https://github.com/zdmaxwell" rel="noopener noreferrer">github.com/zdmaxwell</a>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
