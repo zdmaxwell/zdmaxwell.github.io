@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="v0 MPC on Isaac Sim."
+    />
+    <title>v0 MPC on Isaac Sim</title>
+    <link rel="icon" href="../../../../favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../../styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <div class="frame">
+      <header class="mast">
+        <a class="mark" href="../../../../" aria-label="Zach Maxwell, home">
+          <span class="mark-id">ZM</span>
+          <span class="mark-name">zach maxwell</span>
+        </a>
+        <nav aria-label="Primary">
+          <a href="../../../../">Home</a>
+          <a href="https://github.com/zdmaxwell/f1tenth_workspace" rel="noopener noreferrer">Repo</a>
+        </nav>
+      </header>
+
+      <main id="main">
+        <article class="note">
+          <p class="crumb">
+            <a href="../../">F1TENTH</a>
+            <span aria-hidden="true">/</span>
+            notes
+          </p>
+          <header class="note-head">
+            <time datetime="2026-09-13">13 Sep 2026</time>
+            <h1>v0 MPC on Isaac Sim</h1>
+          </header>
+          <div class="prose">
+            <p>
+              I've been working on this project on and off since mid 2025.
+              This initial post will cover everything I've done so far, which includes the ROS2 scaffolding, Isaac Sim setup,
+              and the initial MPC implementation. My goal is to continue building on this foundation over time as I learn more 
+              about automomy, controls, ML techniques, and more, eventually moving this project from simulation to a real RC car. 
+              The vehicle model I'm using is based on the Traxxas Slash RC car.    
+            </p>
+            <p>
+              To get to this point, I setup the ROS2 workspace and traxxas slash model in Isaac Sim. From there, I used the Isaac Sim guides to 
+              set up a teleop node which I used to generate a centerline path for the car to eventually follow, serving as the reference trajectory
+              for the MPC controller.
+            </p>
+            <p>
+              The MPC controller is implemented in a ROS2 node 
+            </p>
+            <figure class="media">
+              <video controls playsinline muted preload="metadata">
+                <source src="../../media/mpc-9-13-26.mp4" type="video/mp4" />
+              </video>
+              <figcaption>placeholder.</figcaption>
+            </figure>
+            <p>
+            </p>
+          </div>
+        </article>
+      </main>
+
+      <footer class="colophon">
+        <p>© 2026 zach maxwell</p>
+        <p>
+          <a href="../../">back to F1TENTH</a>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

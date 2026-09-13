@@ -324,10 +324,7 @@ a:hover {
 }
 
 .log a {
-  display: grid;
-  grid-template-columns: 8.5rem 1fr;
-  gap: 1.25rem;
-  align-items: baseline;
+  display: block;
   padding: 1.15rem 0.2rem;
   border-bottom: 1px solid var(--line);
   text-decoration: none;
@@ -342,12 +339,6 @@ a:hover {
   color: var(--muted);
   font-size: 0.72rem;
   letter-spacing: 0.08em;
-}
-
-.log-title {
-  font-family: var(--serif);
-  font-size: 1.35rem;
-  line-height: 1.2;
 }
 
 .note {
@@ -403,6 +394,26 @@ a:hover {
   color: var(--ink);
 }
 
+.media {
+  margin: 1.6rem 0 1.5rem;
+}
+
+.media video,
+.media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  background: var(--bg-raise);
+}
+
+.media figcaption {
+  margin-top: 0.65rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
 [aria-current="page"] {
   color: var(--ink);
 }
@@ -430,8 +441,7 @@ a:hover {
 
   .section-head,
   .sessions a,
-  .notes-grid,
-  .log a {
+  .notes-grid {
     grid-template-columns: 1fr;
   }
 
