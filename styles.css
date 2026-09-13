@@ -390,6 +390,55 @@ a:hover {
   line-height: 1.7;
 }
 
+.prose-nest {
+  margin: 0 0 1.1rem;
+}
+
+.prose-nest p {
+  margin-bottom: 0.45rem;
+}
+
+.prose ol {
+  margin: 0 0 1.1rem;
+  padding-left: 1.6rem;
+  color: color-mix(in srgb, var(--ink) 88%, var(--muted));
+  line-height: 1.7;
+}
+
+.prose-nest ol {
+  margin: 0 0 0 0.85rem;
+  padding-left: 1.35rem;
+}
+
+.prose li + li {
+  margin-top: 0.25rem;
+}
+
+.prose code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+  padding: 0.12em 0.38em;
+  border: 1px solid var(--line);
+  background: var(--bg-raise);
+  color: color-mix(in srgb, var(--ink) 82%, var(--accent));
+}
+
+.prose pre {
+  margin: 0 0 1.1rem;
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  background: var(--bg-raise);
+}
+
+.prose pre code {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 0.82em;
+  color: var(--ink);
+}
+
 .prose a {
   color: var(--ink);
 }
@@ -399,7 +448,8 @@ a:hover {
 }
 
 .media video,
-.media img {
+.media img,
+.media svg {
   display: block;
   width: 100%;
   height: auto;

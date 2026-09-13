@@ -48,16 +48,112 @@
               I've been working on this project on and off since mid 2025.
               This initial post will cover everything I've done so far, which includes the ROS2 scaffolding, Isaac Sim setup,
               and the initial MPC implementation. My goal is to continue building on this foundation over time as I learn more 
-              about automomy, controls, ML techniques, and more, eventually moving this project from simulation to a real RC car. 
+              about autonomy, controls, ML techniques, and more, eventually moving this project from simulation to a real RC car. 
               The vehicle model I'm using is based on the Traxxas Slash RC car.    
             </p>
             <p>
-              To get to this point, I setup the ROS2 workspace and traxxas slash model in Isaac Sim. From there, I used the Isaac Sim guides to 
+              To get to this point, I setup the ROS2 workspace and Traxxas Slash model in Isaac Sim. From there, I used the Isaac Sim guides to 
               set up a teleop node which I used to generate a centerline path for the car to eventually follow, serving as the reference trajectory
               for the MPC controller.
             </p>
+            <div class="prose-nest">
+              <p>
+                Isaac Sim publishes the state of the car (position, velocity, heading) on the <code>/odom</code> topic.
+                The odom callback has four phases:
+              </p>
+              <ol>
+                <li>Getting the current state</li>
+                <li>Finding the local waypoints</li>
+                <li>Solving for the optimal control inputs</li>
+                <li>Publishing the result to the car</li>
+              </ol>
+            </div>
             <p>
-              The MPC controller is implemented in a ROS2 node 
+              From the current state, the node finds the closest centerline point, then takes forward samples from the centerline points 
+              and translates them into the car's frame. So at this point, we have a set of waypoints in the car's frame (i.e. up to 30, set from <code>path.max_waypoints</code>). 
+              Those local waypoints are then fit with a cubic polynomial <code>y = c₀ + c₁x + c₂x² + c₃x³</code>; that polynomial is the reference trajectory:
+              in other words, evaluated at any distance ahead of the car, it gives the desired lateral position and heading as seen below.
+            </p>
+            <figure class="media">
+              <svg
+                viewBox="0 0 640 300"
+                role="img"
+                aria-labelledby="car-frame-title car-frame-desc"
+              >
+                <title id="car-frame-title">Cubic fit in the car frame</title>
+                <desc id="car-frame-desc">
+                  Top-down car frame: the car sits at the origin facing +x.
+                  Green dots are forward centerline samples. The green curve is
+                  the cubic fit. The dashed line is the path tangent, which is the desired heading.
+                </desc>
+                <rect width="640" height="300" fill="#1a1815" />
+
+                <g stroke="#2c2924" stroke-width="1" fill="none">
+                  <line x1="92" y1="248" x2="618" y2="248" />
+                  <line x1="92" y1="248" x2="92" y2="28" />
+                </g>
+                <polygon points="618,248 608,244 608,252" fill="#8f877b" />
+                <polygon points="92,28 88,38 96,38" fill="#8f877b" />
+                <text x="612" y="268" text-anchor="end" fill="#8f877b" font-size="11" font-family="IBM Plex Mono, ui-monospace, monospace">x forward</text>
+                <text x="104" y="40" fill="#8f877b" font-size="11" font-family="IBM Plex Mono, ui-monospace, monospace">y left</text>
+
+                <g transform="translate(92 248)">
+                  <rect x="-22" y="-9" width="28" height="18" rx="3" fill="#efe8dc" />
+                  <polygon points="6,-9 22,0 6,9" fill="#efe8dc" />
+                </g>
+                <text x="44" y="278" fill="#8f877b" font-size="11" font-family="IBM Plex Mono, ui-monospace, monospace">car</text>
+
+                <path
+                  d="M 92.0,237.4 L102.5,236.7 L113.0,236.0 L123.5,235.1 L134.0,234.1 L144.5,233.1 L155.0,231.9 L165.5,230.7 L176.0,229.3 L186.5,227.9 L197.0,226.3 L207.5,224.6 L218.0,222.8 L228.5,220.9 L239.0,218.8 L249.5,216.6 L260.0,214.3 L270.5,211.8 L281.0,209.2 L291.5,206.4 L302.0,203.5 L312.5,200.5 L323.0,197.3 L333.5,193.9 L344.0,190.3 L354.5,186.6 L365.0,182.7 L375.5,178.6 L386.0,174.4 L396.5,170.0 L407.0,165.3 L417.5,160.5 L428.0,155.5 L438.5,150.3 L449.0,144.9 L459.5,139.2 L470.0,133.4 L480.5,127.3 L491.0,121.1 L501.5,114.6 L512.0,107.8 L522.5,100.9 L533.0,93.7 L543.5,86.3 L554.0,78.6 L564.5,70.7 L575.0,62.5 L585.5,54.1 L596.0,45.4"
+                  fill="none"
+                  stroke="#6e7c43"
+                  stroke-width="2"
+                />
+
+                <g fill="#8a9480">
+                  <circle cx="108.8" cy="232.4" r="3.2" />
+                  <circle cx="138.2" cy="236.6" r="3.2" />
+                  <circle cx="171.8" cy="227.5" r="3.2" />
+                  <circle cx="205.4" cy="220.2" r="3.2" />
+                  <circle cx="239.0" cy="222.2" r="3.2" />
+                  <circle cx="276.8" cy="208.3" r="3.2" />
+                  <circle cx="310.4" cy="205.4" r="3.2" />
+                  <circle cx="344.0" cy="187.4" r="3.2" />
+                  <circle cx="381.8" cy="174.7" r="3.2" />
+                  <circle cx="415.4" cy="163.9" r="3.2" />
+                  <circle cx="453.2" cy="138.8" r="3.2" />
+                  <circle cx="491.0" cy="123.0" r="3.2" />
+                  <circle cx="528.8" cy="93.2" r="3.2" />
+                  <circle cx="562.4" cy="73.7" r="3.2" />
+                </g>
+
+                <line
+                  x1="306.2"
+                  y1="206.3"
+                  x2="449.0"
+                  y2="149.3"
+                  stroke="#efe8dc"
+                  stroke-width="1.5"
+                  stroke-dasharray="5 4"
+                />
+                <circle cx="377.6" cy="177.8" r="4.2" fill="#efe8dc" />
+                <text x="390" y="168" fill="#efe8dc" font-size="11" font-family="IBM Plex Mono, ui-monospace, monospace">y(x), heading</text>
+
+                <g font-size="11" font-family="IBM Plex Mono, ui-monospace, monospace">
+                  <circle cx="430" cy="282" r="3.2" fill="#8a9480" />
+                  <text x="440" y="286" fill="#8f877b">samples</text>
+                  <line x1="510" y1="282" x2="534" y2="282" stroke="#6e7c43" stroke-width="2" />
+                  <text x="540" y="286" fill="#8f877b">cubic</text>
+                </g>
+              </svg>
+              <figcaption>
+                One <code>/odom</code> snapshot in the car frame. The dots are forward 
+                centerline samples; the curve is the cubic fit. Evaluating at any distance 
+                <code>x</code> ahead of the car, <code>y(x)</code> is desired lateral position 
+                and the dashed tangent is desired heading.
+              </figcaption>
+            </figure>
+            <p>
             </p>
             <figure class="media">
               <video controls playsinline muted preload="metadata">
