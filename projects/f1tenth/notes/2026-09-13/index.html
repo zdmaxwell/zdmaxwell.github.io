@@ -45,15 +45,15 @@
           </header>
           <div class="prose">
             <p>
-              I've been working on this project on and off since mid 2025.
+              Since mid-2025, I've been working on this project in my free time, using it as a way to learn more about topics I'm interested in. 
               This initial post will cover everything I've done so far, which includes the ROS2 scaffolding, Isaac Sim setup,
-              and the initial MPC implementation. My goal is to continue building on this foundation over time as I learn more 
-              about autonomy, controls, ML techniques, and more, eventually moving this project from simulation to a real RC car. 
-              The vehicle model I'm using is based on the Traxxas Slash RC car.    
+              and the initial Model Predictive Control (MPC) implementation. My goal is to continue building on this foundation over time as I learn more 
+              about autonomy, controls, ML techniques, perception, planning, and more, eventually moving this project from simulation to my real RC car. 
+              In simulation, the vehicle model I'm using is based on the Traxxas Slash RC car.    
             </p>
             <p>
-              To get to this point, I setup the ROS2 workspace and Traxxas Slash model in Isaac Sim. From there, I used the Isaac Sim guides to 
-              set up a teleop node which I used to generate a centerline path for the car to eventually follow, serving as the reference trajectory
+              To get to this point, I setup the ROS2 workspace and Traxxas Slash model running in Isaac Sim. From there, I set up a teleop node
+              to generate a centerline path for the car to eventually follow, serving as the reference trajectory
               for the MPC controller.
             </p>
             <div class="prose-nest">
@@ -147,19 +147,25 @@
                 </g>
               </svg>
               <figcaption>
-                One <code>/odom</code> snapshot in the car frame. The dots are forward 
-                centerline samples; the curve is the cubic fit. Evaluating at any distance 
+                Figure shows a single <code>/odom</code> snapshot in the car frame. The dots are forward 
+                centerline samples; the green curve is the cubic fit. Evaluating at any distance 
                 <code>x</code> ahead of the car, <code>y(x)</code> is desired lateral position 
-                and the dashed tangent is desired heading.
+                and the dashed tangent line is the desired heading.
               </figcaption>
             </figure>
             <p>
+              To model the RC car, I used a kinematic bicycle model
+              with state vector <code>[x, y, ψ, v, cte, eψ]</code> and inputs steering <code>δ</code> and acceleration <code>a</code>.
+              Because the cubic is built in the car frame (car at origin and facing +x), each run of the solver starts at <code>x = y = ψ = 0</code>. 
+              Speed is set from the latest <code>/odom</code> reading, but <code>cte</code> and <code>eψ</code> come from the polynomial centered at the origin.
+              Other settings include that the horizon is 10 steps at 0.1&nbsp;s (looks ahead 1&nbsp;s); only the first <code>δ</code> and <code>a</code> are sent as control inputs to the car.
+              Lastly, the wheelbase is 0.335&nbsp;m (13.2&nbsp;in), modeling the Traxxas Slash 2WD.
             </p>
             <figure class="media">
               <video controls playsinline muted preload="metadata">
                 <source src="../../media/mpc-9-13-26.mp4" type="video/mp4" />
               </video>
-              <figcaption>placeholder.</figcaption>
+              <figcaption>Model running in Isaac Sim, following the reference trajectory using the MPC controller.</figcaption>
             </figure>
             <p>
             </p>
