@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../../styles.css" />
@@ -20,51 +20,32 @@
   <body>
     <a class="skip" href="#main">Skip to content</a>
 
-    <div class="frame">
-      <header class="mast">
-        <a class="mark" href="../../" aria-label="Zach Maxwell, home">
-          <span class="mark-id">ZM</span>
-          <span class="mark-name">zach maxwell</span>
-        </a>
-        <nav aria-label="Primary">
-          <a href="../../">Home</a>
-          <a href="https://github.com/zdmaxwell/3d_quadcopter_control" rel="noopener noreferrer">Repo</a>
-        </nav>
-      </header>
+    <div class="page">
+      <div class="column">
+        <header class="mast">
+          <a class="mark" href="../../">Zach Maxwell</a>
+          <nav aria-label="Primary">
+            <a href="../../">Home</a>
+            <a href="https://github.com/zdmaxwell/3d_quadcopter_control" rel="noopener noreferrer">GitHub</a>
+          </nav>
+        </header>
 
-      <main id="main">
-        <section class="hero notes" aria-labelledby="project-title">
-          <p class="eyebrow">
-            <span>project</span>
-            <span aria-hidden="true">·</span>
-            <time datetime="2024-11">2024</time>
-          </p>
-          <h1 id="project-title">3D quadcopter control</h1>
-          <div class="notes-grid">
-            <p>
-              Full 3D PID control for a simulated quadrotor.
-            </p>
-            <p>
-              GitHub repo ->
-              <a href="https://github.com/zdmaxwell/3d_quadcopter_control" rel="noopener noreferrer">3d_quadcopter_control</a>
-            </p>
-          </div>
-        </section>
-
-        <section class="work" id="notes" aria-labelledby="log-title">
-          <div class="section-head">
-            <h2 id="log-title">Notes</h2>
-          </div>
-          <ol class="log"></ol>
-        </section>
-      </main>
-
-      <footer class="colophon">
-        <p>© 2026 zach maxwell</p>
-        <p>
-          <a href="../../">back home</a>
-        </p>
-      </footer>
+        <main id="main">
+          <article class="note">
+            <header class="note-head">
+              <p class="kicker"><span>Blog</span></p>
+              <time datetime="2024-11">November 2024</time>
+              <h1>3D quadcopter control</h1>
+            </header>
+            <div class="prose">
+              <p>Full 3D PID control for a simulated quadrotor.</p>
+              <p>
+                <a href="https://github.com/zdmaxwell/3d_quadcopter_control" rel="noopener noreferrer">GitHub →</a>
+              </p>
+            </div>
+          </article>
+        </main>
+      </div>
     </div>
   </body>
 </html>
